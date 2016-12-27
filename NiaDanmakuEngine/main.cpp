@@ -4,4 +4,5 @@ int WINAPI WinMain(HINSTANCE hInstance,	HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SimpleWindow Window(TEXT("NiaDE"));
 	Window.run();
 	return 0;
+	//Text
 }
