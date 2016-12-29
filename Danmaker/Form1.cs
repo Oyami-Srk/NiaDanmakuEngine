@@ -15,9 +15,15 @@ namespace Danmaker {
 	public partial class Form1 : Form {
 		Looper timeController;
 		Graphics g;
+		Graphics surfg;
+		Bitmap surface;
 
 		public Form1() {
 			InitializeComponent();
+			surface = new Bitmap(MainBox.Size.Width, MainBox.Size.Height);
+			surfg = Graphics.FromImage(surface);
+			Init();
+			this.DoubleBuffered = true;
 			Timer timer = new Timer();
 			timer.Tick += Timer_Counter;
 			timer.Interval = 1000;
@@ -31,8 +37,25 @@ namespace Danmaker {
 			counter = 0;
 		}
 
+		List<BaseBallet> bb = new List<BaseBallet>();
+
+		void Init() {
+			bb.Add(new BaseBallet(x => (float)Math.Pow(x,2), new Point(225, 225), 0.5f, -5f));
+		}
+
+		void DrawAxis(Graphics g, Point center) {
+			g.DrawLine(Pens.Aqua, MainBox.Width / 2, 0, MainBox.Width / 2, MainBox.Height);
+			g.DrawLine(Pens.Aqua, 0, MainBox.Height / 2, MainBox.Width, MainBox.Height / 2);
+		} 
+
 		void Graph() {
-			g.Clear(Color.Black);
+			surfg.Clear(Color.Black);
+			DrawAxis(surfg, new Point(225, 225));
+			foreach (var i in bb)
+				i.UpDraw(surfg);
+
+			g.DrawImage(surface, 0, 0);
+			//6g.FillEllipse(Brushes.White, 0, 0, 10, 10);
 		}
 
 		void GameLoop(double ElapsedTime) {
@@ -44,13 +67,31 @@ namespace Danmaker {
 	}
 
 	public class BaseBallet {
-		public delegate double fx(double x);
 		fx f;
-		BaseBallet(fx _f) {
+		float inc = 0.0f;
+		float x = 0.0f;
+		float r = 2.0f;
+		Point center;
+		Brush br = Brushes.White;
+		public delegate float fx(float x);
+		public BaseBallet(fx _f, Point _center, float _inc = 1.0f, float _x = 0.0f, float _r = 5.0f) {
 			f = _f;
+			inc = _inc;
+			center = _center;
+			x = _x;
+			r = _r;
 		}
 
-		
+		public void SetBrush(Brush _br) {
+			br = _br;
+		}
+
+		public void UpDraw(Graphics g) {
+			g.TranslateTransform(center.X, center.Y);
+			g.FillEllipse(br, x - r, -(f(x) - r), 2 * r, 2 * r);
+			x += inc;
+			g.ResetTransform();
+		}
 	}
 
 	public class PreciseTimer {
