@@ -142,10 +142,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Danmaku\Hops.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SimpleWindow\SimpleWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Danmaku\Hops.h" />
     <ClInclude Include="SimpleWindow\SimpleWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

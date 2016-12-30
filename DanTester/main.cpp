@@ -1,6 +1,8 @@
 #include "SimpleWindow/SimpleWindow.h"
 #include <d2d1.h>
 #include <stdexcept>
+#include <vector>
+#include "Danmaku/Hops.h"
 #pragma comment(lib,"D2d1.lib")
 
 //==Def Windows Class
@@ -12,18 +14,44 @@ template <class T> void SafeRelease(T **ppT) {
 	}
 }
 
-class Action {
-private:
-};
+typedef struct {
+	Vector Speed;
+	Vector SpeedInc;
+	float RotationInc;
+	float FramesDelay;
+}BalletDescriber;
 
 class BaseBallet {
 public:
-	BaseBallet() {
-		
+	BaseBallet(std::vector<BalletDescriber> _anim, Vector _Position = Vector(0, 0)) {
+		Position = _Position;
+		Anim = _anim;
+	}
+
+	BaseBallet(Vector Speed, Vector Rotation, Vector SpeedInc, float RotationInc, Vector _Position = Vector(0, 0)) {
+		Position = _Position;
+		Anim.push_back({ Speed,SpeedInc,RotationInc});
 	}
 	
-protected:
+	Vector GetPosition() {
+		if (Anim.size() <= 0)
+			return Vector(0, 0);
+		else if (Anim.size() == 1) {
+			Position += (Anim[0].Speed);
+			Anim[0].Speed + (Anim[0].SpeedInc.Rotate(Anim[0].RotationInc));
+		}
+	}
 
+	bool CheckOutside(float Width, float Height, float R) {
+		if (Position.X > (Width + R) || Position.Y > (Height + R))
+			return (isDestoryed = true);
+	}
+
+protected:
+	std::vector<BalletDescriber> Anim;
+	Vector Position = Vector(0, 0);
+	bool isDestoryed = false;
+	int nCount = 0;
 };
 
 
