@@ -24,7 +24,6 @@
 		/// </summary>
 		private void InitializeComponent() {
 			this.MainBox = new System.Windows.Forms.PictureBox();
-			this.textBox1 = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.MainBox)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -36,34 +35,23 @@
 			this.MainBox.TabIndex = 0;
 			this.MainBox.TabStop = false;
 			// 
-			// textBox1
-			// 
-			this.textBox1.Location = new System.Drawing.Point(511, 46);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(100, 21);
-			this.textBox1.TabIndex = 1;
-			this.textBox1.Text = "10";
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ButtonShadow;
 			this.ClientSize = new System.Drawing.Size(681, 484);
-			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.MainBox);
 			this.Name = "Form1";
 			this.Text = "Form1";
 			((System.ComponentModel.ISupportInitialize)(this.MainBox)).EndInit();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
 
 		private System.Windows.Forms.PictureBox MainBox;
-		private System.Windows.Forms.TextBox textBox1;
 	}
 }
 
