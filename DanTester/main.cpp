@@ -67,8 +67,11 @@ public:
 	}
 
 	bool CheckOutside(float Width, float Height, float R) {
-		if (Position.X > (Width + R) || Position.Y > (Height + R))
-			return (isDestoryed = true);
+		if (Position.X > (Width + R) || Position.Y > (Height + R)) {
+			isDestoryed = true;
+			return true;
+		}
+		return false;
 	}
 
 	bool isDestoryed = false;
@@ -81,17 +84,13 @@ public:
 private: 
 	void _change_Position_by_AnimId(int id) {
 		Position += (Anim[id].Speed);
-		/*There is a question in sentence below: Rotate the speed first or increase the speed first*/
-
-		
+		/*There is a question in sentences below: Rotate the speed first or increase the speed first*/
  		Anim[id].Speed += Anim[id].SpeedInc;
  		Anim[id].Speed = Anim[id].Speed.Rotate(Anim[id].RotationInc);
-		
-
 		//Anim[id].Speed += (Anim[id].SpeedInc = Anim[id].SpeedInc.Rotate(Anim[id].RotationInc));
 
 		char Buf[32];
-		sprintf(Buf, "vX:%f,vY:%f\n", Anim[id].Speed.X, Anim[id].Speed.Y);
+		sprintf(Buf, "vX:%f,vY:%f %d\n", Anim[id].Speed.X, Anim[id].Speed.Y,nCount);
 		OutputDebugStringA(Buf);
 	}
 };
@@ -138,8 +137,12 @@ public:
 	void Render(float dt) {
 		pTg->BeginDraw();
 		pTg->Clear(D2D1::ColorF(D2D1::ColorF::Black));
-		Vector v = b->GetPosition();
-		DrawPoint(v.X, v.Y);
+		if (!b->CheckOutside(800, 600, 2)) {
+			Vector v = b->GetPosition();
+			DrawPoint(v.X, v.Y);
+		} else {
+			Vector v = b->GetPosition();
+		}
 		pTg->EndDraw();
 	}
 
@@ -148,7 +151,9 @@ public:
 
 	void InitGame(void) {
 		b = new BaseBallet(Vector(400, 300));
-		b->PushMov(Vector(1, 1), Vector(0, 0), 0.0f, -1);
+		b->PushMov(Vector(1, 1), Vector(0, 0), 0.01f, 200);
+		b->PushMov(Vector(0.1, 1), Vector(0, 0), 4.0f, -1);
+
 		pTg->CreateSolidColorBrush(
 			D2D1::ColorF(D2D1::ColorF::Red),
 			&pBlackBrush
