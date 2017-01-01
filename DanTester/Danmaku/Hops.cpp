@@ -41,6 +41,7 @@ bool Vector::operator==(Vector & _o) {
 	return (X == _o.X && Y == _o.Y);
 }
 
-Vector Vector::Rotate(float _rot) {
+Vector Vector::Rotate(float _ang) {
+	float _rot = _ang * PI / 180;
 	return Vector(X * cos(_rot) - Y * sin(_rot), X * sin(_rot) + Y*cos(_rot));
 }
