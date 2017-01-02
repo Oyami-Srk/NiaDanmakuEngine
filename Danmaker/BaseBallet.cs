@@ -73,8 +73,8 @@ namespace Danmaker {
 			/*There is a question in sentences below: Rotate the speed first or increase the speed first*/
 			BalletDescriber tmp;
 			tmp = Anim[id];
-			tmp.Speed += Anim[id].SpeedInc;
-			tmp.Speed = Anim[id].Speed.Rotate(Anim[id].RotationInc);
+			tmp.Speed = tmp.Speed + tmp.SpeedInc;
+			tmp.Speed = tmp.Speed.Rotate(tmp.RotationInc);
 			Anim[id] = tmp;
 			//Anim[id].Speed += (Anim[id].SpeedInc = Anim[id].SpeedInc.Rotate(Anim[id].RotationInc));
 		}
