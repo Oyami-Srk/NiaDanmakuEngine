@@ -71,7 +71,7 @@ public:
 			isDestoryed = true;
 			return true;
 		}
-		return false;
+		return isDestoryed;
 	}
 
 	bool isDestoryed = false;
@@ -94,7 +94,6 @@ private:
 		OutputDebugStringA(Buf);
 	}
 };
-
 
 class DanmakuTester : public SimpleWindow {
 public:
@@ -136,7 +135,7 @@ public:
 
 	void Render(float dt) {
 		pTg->BeginDraw();
-		pTg->Clear(D2D1::ColorF(D2D1::ColorF::Black));
+		//pTg->Clear(D2D1::ColorF(D2D1::ColorF::Black));
 		if (!b->CheckOutside(800, 600, 2)) {
 			Vector v = b->GetPosition();
 			DrawPoint(v.X, v.Y);
@@ -151,8 +150,7 @@ public:
 
 	void InitGame(void) {
 		b = new BaseBallet(Vector(400, 300));
-		b->PushMov(Vector(1, 1), Vector(0, 0), 0.01f, 200);
-		b->PushMov(Vector(0.1, 1), Vector(0, 0), 4.0f, -1);
+		b->PushMov(Vector(1, 0), Vector(0, 0.002), -0.0f, 300);
 
 		pTg->CreateSolidColorBrush(
 			D2D1::ColorF(D2D1::ColorF::Red),

@@ -37,60 +37,118 @@ namespace Danmaker {
 			counter = 0;
 		}
 
-		List<BaseBallet> bb = new List<BaseBallet>();
+		BaseBallet bb;
 
 		void Init() {
-			bb.Add(new BaseBallet(x => (float)Math.Pow(x,2), new Point(225, 225), 0.5f, -5f));
+			bb = new BaseBallet(new Vector2(225, 225), new Vector2(1, 1), new Vector2(0, 0));
 		}
 
 		void DrawAxis(Graphics g, Point center) {
 			g.DrawLine(Pens.Aqua, MainBox.Width / 2, 0, MainBox.Width / 2, MainBox.Height);
 			g.DrawLine(Pens.Aqua, 0, MainBox.Height / 2, MainBox.Width, MainBox.Height / 2);
-		} 
+		}
+
+		void DrawPoint(Graphics g, float x, float y, float r = 2) {
+			g.FillEllipse(Brushes.Red, x - r, y - r, r * 2, r * 2);
+		}
 
 		void Graph() {
-			surfg.Clear(Color.Black);
-			DrawAxis(surfg, new Point(225, 225));
-			foreach (var i in bb)
-				i.UpDraw(surfg);
-
+			//DrawAxis(surfg, new Point(225, 225));
+			//==
+			Vector2 v = bb.GetPosition();
+			DrawPoint(surfg, v.X, v.Y);
+			//==
 			g.DrawImage(surface, 0, 0);
 			//6g.FillEllipse(Brushes.White, 0, 0, 10, 10);
 		}
 
+		bool start = false;
+
 		void GameLoop(double ElapsedTime) {
-			Graph();
+			if(start)
+				Graph();
 			counter++;
 		}
 
 		int counter = 0;
-	}
 
-	public class BaseBallet {
-		fx f;
-		float inc = 0.0f;
-		float x = 0.0f;
-		float r = 2.0f;
-		Point center;
-		Brush br = Brushes.White;
-		public delegate float fx(float x);
-		public BaseBallet(fx _f, Point _center, float _inc = 1.0f, float _x = 0.0f, float _r = 5.0f) {
-			f = _f;
-			inc = _inc;
-			center = _center;
-			x = _x;
-			r = _r;
+		private void label1_Click(object sender, EventArgs e) {
+			
 		}
 
-		public void SetBrush(Brush _br) {
-			br = _br;
+		private void button1_Click(object sender, EventArgs e) {
+			start = false;
 		}
 
-		public void UpDraw(Graphics g) {
-			g.TranslateTransform(center.X, center.Y);
-			g.FillEllipse(br, x - r, -(f(x) - r), 2 * r, 2 * r);
-			x += inc;
-			g.ResetTransform();
+		private void button2_Click(object sender, EventArgs e) {
+			start = true;
+			surfg.Clear(Color.Black);
+		}
+
+		private void button3_Click(object sender, EventArgs e) {
+			start = false;
+			BalletDescriber tmp = bb.Anim[0];
+			tmp.Speed = new Vector2((float)SX.Value / 10.0f, (float)SY.Value / 10.0f);
+			tmp.SpeedInc = new Vector2((float)SIX.Value / 10.0f, (float)SIY.Value / 10.0f);
+			tmp.RotationInc = (float)R.Value / 10.0f;
+			bb.Position = new Vector2(PX.Value, PY.Value);
+			bb.Anim[0] = tmp;
+		}
+
+		private void PX_Scroll(object sender, EventArgs e) {
+			PXT.Text = PX.Value.ToString();
+		}
+
+		private void PY_Scroll(object sender, EventArgs e) {
+			PYT.Text = PY.Value.ToString();
+		}
+
+		private void SX_Scroll(object sender, EventArgs e) {
+			SXT.Text = (SX.Value / 10.0f).ToString();
+		}
+
+		private void SY_Scroll(object sender, EventArgs e) {
+			SYT.Text = (SY.Value / 10.0f).ToString();
+		}
+
+		private void SIX_Scroll(object sender, EventArgs e) {
+			SIXT.Text = (SIX.Value / 10.0f).ToString();
+		}
+
+		private void SIY_Scroll(object sender, EventArgs e) {
+			SIYT.Text = (SIY.Value / 10.0f).ToString();
+		}
+
+		private void R_Scroll(object sender, EventArgs e) {
+			RT.Text = (R.Value / 10.0f).ToString();
+		}
+
+		private void PXT_TextChanged(object sender, EventArgs e) {
+			PX.Value = int.Parse(PXT.Text);
+		}
+
+		private void SXT_TextChanged(object sender, EventArgs e) {
+			SX.Value = (int)(float.Parse(SXT.Text) * 10.0f);
+		}
+
+		private void SIXT_TextChanged(object sender, EventArgs e) {
+			SIX.Value = (int)(float.Parse(SIXT.Text) * 10.0f);
+		}
+
+		private void RT_TextChanged(object sender, EventArgs e) {
+			R.Value = (int)(float.Parse(RT.Text) * 10.0f);
+		}
+
+		private void SIYT_TextChanged(object sender, EventArgs e) {
+			SIY.Value = (int)(float.Parse(SIYT.Text) * 10.0f);
+		}
+
+		private void SYT_TextChanged(object sender, EventArgs e) {
+			SY.Value = (int)(float.Parse(SYT.Text) * 10.0f);
+		}
+
+		private void PYT_TextChanged(object sender, EventArgs e) {
+			PY.Value = int.Parse(PYT.Text);
 		}
 	}
 

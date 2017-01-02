@@ -13,6 +13,7 @@ public:
 	Vector operator+=(Vector& _o);
 	Vector operator-=(Vector& _o);
 	bool operator==(Vector& _o);
+	bool operator!=(Vector& _o);
 	Vector Rotate(float _ang);
 
 	float X, Y;
