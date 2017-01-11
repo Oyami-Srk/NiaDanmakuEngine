@@ -1,8 +1,7 @@
-#include "SimpleWindow/SimpleWindow.h"
+#include "NiaDE/NiaDE.h"
 
 int WINAPI WinMain(HINSTANCE hInstance,	HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	SimpleWindow Window(TEXT("NiaDE"));
-	Window.run();
+	NiaDE::Frame Frame(TEXT("NiaDE"));
+	Frame.run();
 	return 0;
-	//Text
 }

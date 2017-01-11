@@ -89,7 +89,7 @@ private:
  		Anim[id].Speed = Anim[id].Speed.Rotate(Anim[id].RotationInc);
 		//Anim[id].Speed += (Anim[id].SpeedInc = Anim[id].SpeedInc.Rotate(Anim[id].RotationInc));
 
-		char Buf[32];
+		char Buf[1024];
 		sprintf(Buf, "vX:%f,vY:%f %d\n", Anim[id].Speed.X, Anim[id].Speed.Y,nCount);
 		OutputDebugStringA(Buf);
 	}
@@ -150,8 +150,8 @@ public:
 
 	void InitGame(void) {
 		b = new BaseBallet(Vector(400, 300));
-		b->PushMov(Vector(1, 0), Vector(0, 0.002), -0.0f, 300);
-		b->PushMov(Vector(0, 2), Vector(0, 0), 0.6f, -1);
+		b->PushMov(Vector(1, 0), Vector(0, 0), -0.0f, 300);
+		b->PushMov(Vector(0, -PI / 6), Vector(0, 0), -0.1f, -1);
 
 		pTg->CreateSolidColorBrush(
 			D2D1::ColorF(D2D1::ColorF::Red),

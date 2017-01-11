@@ -144,11 +144,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NiaDE\NiaDE_Frame.cpp" />
+    <ClCompile Include="NiaDE\NiaDE_Game.cpp" />
     <ClCompile Include="SimpleWindow\SimpleWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NiaDE\NiaDE.h" />
     <ClInclude Include="NiaDE\NiaDE_Frame.h" />
+    <ClInclude Include="NiaDE\NiaDE_Game.h" />
     <ClInclude Include="SimpleWindow\SimpleWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
