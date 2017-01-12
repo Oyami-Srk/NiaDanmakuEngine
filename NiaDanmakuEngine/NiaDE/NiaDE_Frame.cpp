@@ -28,8 +28,13 @@ namespace NiaDE {
 		SafeRelease(&pTg);
 		SafeRelease(&pD2DFactory);
 	}
+
 	void Frame::run(void) {
-		InitGame();
+		if (!pGame) {
+			throw std::runtime_error("Where is Game?");
+			return;
+		}
+		pGame->OnGameInit();
 		MSG msg;//消息结构
 		bool done, result = true;
 		ZeroMemory(&msg, sizeof(MSG));
@@ -53,8 +58,12 @@ namespace NiaDE {
 				DispatchMessage(&msg);
 			}
 			//执行渲染
-			this->Update(m_DelayTime);
-			this->Render(m_DelayTime);
+			pGame->OnGameLogic(m_DelayTime);
+			pGame->OnBackground(m_DelayTime);
+			pGame->OnGameArea(m_DelayTime);
+			pGame->OnLogoArea(m_DelayTime);
+			pGame->OnDataArea(m_DelayTime);
+
 			m_DelayTime = time(NULL) - m_LastTime;
 			if (this->isFpsDisplayed) {
 				static int frameCount = 0;
@@ -86,4 +95,9 @@ namespace NiaDE {
 			m_LastTime = time(NULL);
 		}
 	}
+
+	void Frame::registerGameClass(GameA *pG) {
+		this->pGame = pG;
+	}
+
 }

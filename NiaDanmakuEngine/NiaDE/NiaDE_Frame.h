@@ -2,6 +2,7 @@
 #define __NIADE_FRAME_H__
 
 #include "NiaDE.h"
+#include "NiaDE_Game.h"
 #include "../SimpleWindow/SimpleWindow.h"
 
 namespace NiaDE {
@@ -9,14 +10,8 @@ namespace NiaDE {
 	public:
 		Frame(WINSTR lpszCaption, int Width = 800, int Height = 600, HICON hIcon = NULL, bool Show = true, DWORD CFlag = NULL);
 		~Frame();
-
-		virtual void Update(float dt) {};
-
-		virtual void Render(float dt) {};
-		
-		virtual void InitGame(void) {};
-
 		void run(void);
+		void registerGameClass(class GameA *pG);
 
 	private:
 		ID2D1Factory *pD2DFactory = nullptr;
@@ -24,6 +19,7 @@ namespace NiaDE {
 		bool isFpsLimited = true;
 		bool isFpsDisplayed = true;
 		float Fps_Limit_Count = 60.0f;
+		class GameA *pGame = nullptr;
 	};
 }
 

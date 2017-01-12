@@ -17,5 +17,6 @@ template <class T> void SafeRelease(T **ppT) {
 }
 
 #include "NiaDE_Frame.h"
+#include "NiaDE_Game.h"
 
 #endif
