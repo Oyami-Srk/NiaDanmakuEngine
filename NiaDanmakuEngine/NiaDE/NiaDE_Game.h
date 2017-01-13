@@ -6,7 +6,7 @@
 namespace NiaDE {
 	class GameA {
 	public:
-		GameA(ID2D1HwndRenderTarget*);
+		void RegisterClass(ID2D1HwndRenderTarget *_T);
 
 	public:	//Virtual
 		virtual void OnBackground(float dt) {};

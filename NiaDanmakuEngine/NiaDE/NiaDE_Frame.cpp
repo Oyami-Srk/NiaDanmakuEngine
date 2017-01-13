@@ -98,6 +98,7 @@ namespace NiaDE {
 
 	void Frame::registerGameClass(GameA *pG) {
 		this->pGame = pG;
+		this->pGame->RegisterClassW(this->pTg);
 	}
 
 }
