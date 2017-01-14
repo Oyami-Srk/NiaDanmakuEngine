@@ -27,6 +27,9 @@
     <ClCompile Include="NiaDE\NiaDE_Game.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="X2D\Sprite2D.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SimpleWindow\SimpleWindow.h">
@@ -39,6 +42,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="NiaDE\NiaDE_Game.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="X2D\X2D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="X2D\Sprite2D.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

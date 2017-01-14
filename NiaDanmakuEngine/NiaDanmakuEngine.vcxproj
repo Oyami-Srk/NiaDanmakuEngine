@@ -146,12 +146,15 @@
     <ClCompile Include="NiaDE\NiaDE_Frame.cpp" />
     <ClCompile Include="NiaDE\NiaDE_Game.cpp" />
     <ClCompile Include="SimpleWindow\SimpleWindow.cpp" />
+    <ClCompile Include="X2D\Sprite2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NiaDE\NiaDE.h" />
     <ClInclude Include="NiaDE\NiaDE_Frame.h" />
     <ClInclude Include="NiaDE\NiaDE_Game.h" />
     <ClInclude Include="SimpleWindow\SimpleWindow.h" />
+    <ClInclude Include="X2D\Sprite2D.h" />
+    <ClInclude Include="X2D\X2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

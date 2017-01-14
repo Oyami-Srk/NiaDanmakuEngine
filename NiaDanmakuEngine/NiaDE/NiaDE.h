@@ -16,6 +16,7 @@ template <class T> void SafeRelease(T **ppT) {
 	}
 }
 
+#include "../X2D/X2D.h"
 #include "NiaDE_Frame.h"
 #include "NiaDE_Game.h"
 
