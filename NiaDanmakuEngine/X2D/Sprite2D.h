@@ -15,7 +15,8 @@ namespace X2D {
 		);
 
 	public:
-		Sprite2D(ID2D1RenderTarget *pRenderTarget, PCWSTR uri = NULL);
+		Sprite2D(ID2D1RenderTarget *pRenderTarget, PCWSTR uri = NULL, int w = 0, int h = 0);
+		Sprite2D(ID2D1RenderTarget *pRenderTarget, ID2D1Bitmap *Bitmap = NULL);
 		~Sprite2D();
 		HRESULT LoadSprite(PCWSTR uri, int w = 0, int h = 0);
 		D2D1_SIZE_F GetSize();
@@ -27,7 +28,7 @@ namespace X2D {
 
 	protected:
 		ID2D1RenderTarget *Target = nullptr;
-		ID2D1Bitmap *SpriteImage = nullptr;
+		ID2D1Bitmap *SpriteImage = NULL;
 		D2D1_SIZE_F Size;
 	};
 }

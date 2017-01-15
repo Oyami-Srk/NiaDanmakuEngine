@@ -43,8 +43,13 @@ namespace X2D {
 		}
 		// If a new width or height was specified, create an
 		// IWICBitmapScaler and use it to resize the image.
+		UINT originalWidth, originalHeight;
+		if (destinationWidth == 0 || destinationHeight == 0) {
+			hr = pSource->GetSize(&originalWidth, &originalHeight);
+			destinationHeight = originalHeight;
+			destinationWidth = originalWidth;
+		}
 		if (destinationWidth != 0 || destinationHeight != 0) {
-			UINT originalWidth, originalHeight;
 			hr = pSource->GetSize(&originalWidth, &originalHeight);
 			if (SUCCEEDED(hr)) {
 				if (destinationWidth == 0) {
@@ -87,10 +92,15 @@ namespace X2D {
 		return hr;
 	}
 
-	Sprite2D::Sprite2D(ID2D1RenderTarget *pRenderTarget, PCWSTR uri)
-		:Target(pRenderTarget) {
+	Sprite2D::Sprite2D(ID2D1RenderTarget *pRenderTarget, PCWSTR uri, int w, int h) {
+		this->Target = pRenderTarget;
 		if (uri)
-			LoadSprite(uri);
+			LoadSprite(uri, w, h);
+	}
+
+	Sprite2D::Sprite2D(ID2D1RenderTarget *pRenderTarget, ID2D1Bitmap *Bitmap)
+		: Target(pRenderTarget), SpriteImage(Bitmap) {
+
 	}
 
 	Sprite2D::~Sprite2D() {
@@ -99,8 +109,8 @@ namespace X2D {
 
 	HRESULT Sprite2D::LoadSprite(PCWSTR uri,int w, int h) {
 		HRESULT hr = S_FALSE;
-		if (SpriteImage)
-			SpriteImage->Release();
+ 		if (SpriteImage)
+ 			SpriteImage->Release();
 		hr = LoadBitmapFromFile(Target, uri, &SpriteImage, w, h);
 		if (hr != S_OK)
 			SpriteImage = nullptr;
