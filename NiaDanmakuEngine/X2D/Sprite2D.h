@@ -11,7 +11,9 @@ namespace X2D {
 			PCWSTR uri,
 			ID2D1Bitmap **ppBitmap,
 			UINT destinationWidth = 0,
-			UINT destinationHeight = 0
+			UINT destinationHeight = 0,
+			UINT clipWidth = 0,
+			UINT clipHeight = 0
 		);
 
 	public:

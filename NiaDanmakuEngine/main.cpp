@@ -9,7 +9,7 @@ public:
 	void OnBackground(float dt) {
 		Target->BeginDraw();
 		//Target->Clear(D2D1::ColorF(D2D1::ColorF::Black));
-		
+		spr->Draw(0, 0, &D2D1::RectF(0, 0, 64, 960));
 		Target->EndDraw();
 	}
 
@@ -20,7 +20,7 @@ public:
 	X2D::Sprite2D *spr;
 
 	void OnGameInit() {
-		spr = new X2D::Sprite2D(Target, L"front00.png",250,250);
+		spr = new X2D::Sprite2D(Target, L"front00.png",640,480);
 	}
 };
 

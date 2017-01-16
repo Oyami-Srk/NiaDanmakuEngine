@@ -6,7 +6,9 @@ namespace X2D {
 		PCWSTR uri,
 		ID2D1Bitmap **ppBitmap,
 		UINT destinationWidth,
-		UINT destinationHeight
+		UINT destinationHeight,
+		UINT clipWidth,
+		UINT clipHeight
 	) {
 		HRESULT hr = S_OK;
 
@@ -15,6 +17,7 @@ namespace X2D {
 		IWICStream *pStream = NULL;
 		IWICFormatConverter *pConverter = NULL;
 		IWICBitmapScaler *pScaler = NULL;
+		IWICBitmapClipper *pClipper = NULL;//Added;
 		IWICImagingFactory *pIWICFactory = NULL;
 
 		hr = CoCreateInstance(
@@ -69,6 +72,8 @@ namespace X2D {
 						WICBitmapInterpolationModeCubic
 					);
 				}
+
+		
 				if (SUCCEEDED(hr)) {
 					hr = pConverter->Initialize(
 						pScaler,
